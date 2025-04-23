@@ -1,11 +1,16 @@
 const posts = require('../data/postsList.js');
 
 function index(req,res){
-    res.send('Elenco dei post');
+    res.json(posts);
 }
 
 function show(req,res){
-    res.send(`Post con id ${req.params.id}`);
+    const id = parseInt(req.params.id)
+    const post = posts.find(post => post.id === id);
+    if(!post){
+        res.sendStatus(404);
+    }
+    res.json(post);
 }
 
 function store(req,res){
@@ -21,7 +26,10 @@ function modify(req,res){
 }
 
 function destroy(req,res){
+    delete posts[req.params.id -1];
+    console.log(posts);
     res.send(`Cancellazione del post con id ${req.params.id}`);
+    res.sendStatus(204);
 }
 
 
