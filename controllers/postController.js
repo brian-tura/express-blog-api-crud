@@ -15,11 +15,44 @@ function show(req, res) {
 
 function store(req, res) {
     console.log(req.body);
-    res.send('Inserimento nuovo post');
+    
+
+    const newId = posts[posts.length - 1].id + 1;
+
+    const newPost = {
+        id: newId,
+        name: req.body.name
+    }
+
+    posts.push(newPost);
+
+    console.log(posts);
+
+    res.status(201);
+    res.json(newPost);
 }
 
 function update(req, res) {
-    res.send(`Modifica totale del post con id ${req.params.id}`);
+
+    const id = parseInt(req.params.id);
+
+    const post = posts.find(post => post.id === id);
+
+    if(!post) {
+        res.status(404);
+
+        return res.json({
+            error: "Not Found",
+            message: "post non trovato"
+        })
+    }
+
+    post.name = req.body.name;
+
+    console.log(posts);
+
+    res.json(post);
+
 }
 
 function modify(req, res) {
