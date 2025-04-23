@@ -28,7 +28,6 @@ function modify(req,res){
 function destroy(req,res){
     delete posts[req.params.id -1];
     console.log(posts);
-    res.send(`Cancellazione del post con id ${req.params.id}`);
     res.sendStatus(204);
 }
 
