@@ -3,12 +3,15 @@ const app = express();
 const port = 3000;
 const postRouter = require('./routers/posts.js')
 const errorsHandler = require('./middlewares/errorsHandler.js');
+const notFound = require('./middlewares/notFound.js')
 
 app.use(express.json());
 
 app.use(express.static('public'));
 
 app.use(errorsHandler);
+
+app.use(notFound);
 
 
 
