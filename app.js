@@ -9,17 +9,15 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-app.use(errorsHandler);
-
-app.use(notFound);
-
-
-
 app.use("/posts", postRouter);
 
 app.get('/', (req, res) => {
     res.send('I miei posts')
 })
+
+app.use(errorsHandler);
+
+app.use(notFound);
 
 app.listen(port, () => {
     console.log(`App in ascolto sulla porta ${port}`);
